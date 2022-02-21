@@ -2,6 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\EventController;
+use App\Http\Controllers\ProductsController;
+use App\Http\Controllers\ContactController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,30 +17,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    $nome = 'Gabriele';
-    $idade = 29;
-    $profissao = 'Programadora';
+Route::get('/', [EventController::class, 'index']);
 
-    $array = [1,2,3,4,5];
+Route::get('/events/create', [EventController::class, 'create']);
 
-    $nomes = ['Gabriele', 'Pedro', 'Bibi', 'Gata'];
+Route::get('/products', [ProductsController::class, 'products']);
 
-    return view('welcome', 
-    [
-        'nome' => $nome,
-        'idade' => $idade,
-        'profissao' => $profissao,
-        'array' => $array,
-        'nomes' => $nomes
-    ]);
-});
-
-Route::get('/products', function () {
-    return view('products');
-});
-
-
-Route::get('/contact', function () {
-    return view('contact');
-});
+Route::get('/contact', [ContactController::class, 'contact']);
