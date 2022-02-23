@@ -21,6 +21,4 @@ Route::get('/', [EventController::class, 'index']);
 
 Route::get('/events/create', [EventController::class, 'create']);
 
-Route::get('/products', [ProductsController::class, 'products']);
-
 Route::get('/contact', [ContactController::class, 'contact']);
