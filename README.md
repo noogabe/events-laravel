@@ -44,16 +44,24 @@ Fluxo
 &nbsp;
 
 ## Model
-A configuração do banco de dados é feita no arquivo .env. Esse arquivo não é versionado por segurança,
-ORM - Object Relational Map - Chamada Eloquent - CRUD
+A configuração do banco de dados é feita no arquivo .env. Esse arquivo não é versionado por segurança. Eloquent é a ORM (Object Relational Map) do Laravel, ela é responsável pela conexão com o banco de dados e representa a abstração de uma Query. 
+* select
+* insert
+* update
+* delete
 
-### Migrations
+Cada tabela possui um Model que é responsável pela interação entre requisições do bd. A convenção par o Model é o nome da entidade no singular (Event), enquanto a tabela é no pural (events). No Model são feitas poucas alterações nos arquivos, geralmente configurações específicas.
+
+&nbsp;
+
+## Migrations
 As migrações são como controle de versão para seu banco de dados, permitindo que sua equipe defina e compartilhe a definição do esquema de banco de dados do aplicativo. 
 * Versionamento do banco de dados
 * Podemos avançar e retroceder para outra versão a qualquer momento (migrate e rollback)
-* Adicionar e remover colunas de forma facilitada
-* Configurar um db de uma nova instalação em apenas um comando 
-`php artisan migrate`
+* Criação de tabelas
+* Adicionar, remover e modificar colunas de forma facilitada
+* Configurar um db de uma nova instalação em apenas um comando (migrar dados)
+* `php artisan migrate`
 * Criar nova migration
 `php artisan make:migration nome_da_migration_table`
 * Verificar status das migrations 
@@ -65,7 +73,7 @@ Para adicionar coluna à tabela existente é necessário fazer nova migration pa
 
 Devemos especificar a nova coluna nos métodos up e down da classe da nova migration
 
-Para alterar coluna já existentem devemos instalar pacote doctrine/dbal, para depois criar uma nova migration com as especificações da alteração desejada
+Para alterar coluna já existente, devemos instalar pacote doctrine/dbal para depois criar uma nova migration com as especificações da alteração desejada
 `composer require doctrine/dbal`
 
 
