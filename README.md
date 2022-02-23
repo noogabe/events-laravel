@@ -1,78 +1,72 @@
-<p align="center"><img src="https://res.cloudinary.com/dtfbvvkyp/image/upload/v1566331377/laravel-logolockup-cmyk-red.svg" width="400"></p>
+# Aprendendo Laravel 7.0.0
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+## Configurando ambiente
+* Instalar Composer
+* Xampp (Apache, PHP e Mysql)
 
-## About Laravel
+Criar projeto Laravel
+`composer create-project laravel/laravel --prefer-dist NomeProjeto`
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Ou (usando a versão 7 do Laravel)
+`composer create-project laravel/laravel=7 --prefer-dist NomeProjeto`
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+&nbsp;
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Iniciando um servidor com artisan
+Para visualizar projeto no navegador
 
-## Learning Laravel
+`php artisan serve`
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+&nbsp;
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Views
+Blade é o Template Engine do Laravel, ele oferece a possibilidade de deixar views dinâmicas exibindo tags HTML e também outros dados que podem vir do banco de dados. As Views são renderizadas pelo Blade e são sua responsabilidade.
+* Possibilidade de criar condições, laços de repetição, etc
+* Comentário: {{-- Comentario não é renderizado nem pra view --}}
+* Podemos criar um layout padrão: main.blade.php, onde podemos colocar tudo o que for comum a todas as views
+* Nas outras views, basta recuperar o main e inserir seu respectivo conteúdo
 
-## Laravel Sponsors
+&nbsp;
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+## Controllers
+Contém quase toda a lógica da aplicação
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[British Software Development](https://www.britishsoftware.co)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- [UserInsights](https://userinsights.com)
-- [Fragrantica](https://www.fragrantica.com)
-- [SOFTonSOFA](https://softonsofa.com/)
-- [User10](https://user10.com)
-- [Soumettre.fr](https://soumettre.fr/)
-- [CodeBrisk](https://codebrisk.com)
-- [1Forge](https://1forge.com)
-- [TECPRESSO](https://tecpresso.co.jp/)
-- [Runtime Converter](http://runtimeconverter.com/)
-- [WebL'Agence](https://weblagence.com/)
-- [Invoice Ninja](https://www.invoiceninja.com)
-- [iMi digital](https://www.imi-digital.de/)
-- [Earthlink](https://www.earthlink.ro/)
-- [Steadfast Collective](https://steadfastcollective.com/)
-- [We Are The Robots Inc.](https://watr.mx/)
-- [Understand.io](https://www.understand.io/)
-- [Abdel Elrafa](https://abdelelrafa.com)
-- [Hyper Host](https://hyper.host)
-- [Appoly](https://www.appoly.co.uk)
-- [OP.GG](https://op.gg)
+Criando um Controller
 
-## Contributing
+`php artisan make:controller NomeController`
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Fluxo
+1. Definir rota
+2. Criar controller
+3. Controller busca dados no Model
+4. Usar retorno do controller na view
 
-## Code of Conduct
+&nbsp;
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## Model
+A configuração do banco de dados é feita no arquivo .env. Esse arquivo não é versionado por segurança,
+ORM - Object Relational Map - Chamada Eloquent - CRUD
 
-## Security Vulnerabilities
+### Migrations
+As migrações são como controle de versão para seu banco de dados, permitindo que sua equipe defina e compartilhe a definição do esquema de banco de dados do aplicativo. 
+* Versionamento do banco de dados
+* Podemos avançar e retroceder para outra versão a qualquer momento (migrate e rollback)
+* Adicionar e remover colunas de forma facilitada
+* Configurar um db de uma nova instalação em apenas um comando 
+`php artisan migrate`
+* Criar nova migration
+`php artisan make:migration nome_da_migration_table`
+* Verificar status das migrations 
+`migrate:status`
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Para adicionar coluna à tabela existente é necessário fazer nova migration para não perder dados existentes na tabela
 
-## License
+`php artisan make:migration add_coluna_to_nometabela_table`
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Devemos especificar a nova coluna nos métodos up e down da classe da nova migration
+
+Para alterar coluna já existentem devemos instalar pacote doctrine/dbal, para depois criar uma nova migration com as especificações da alteração desejada
+`composer require doctrine/dbal`
+
+
+
