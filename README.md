@@ -19,6 +19,17 @@ Para visualizar projeto no navegador
 
 &nbsp;
 
+## Routing
+O Routing no Laravel permite que você roteie todas as solicitações de sua aplicação para seu controlador apropriado. As rotas principais e primárias do Laravel reconhecem e aceitam um URI (Uniform Resource Identifier) junto com um closure, visto que deve ser uma forma simples e expressiva de roteamento. Todas as rotas do Laravel são definidas em seus arquivos de rotas, que estão localizados no diretório **routes**. Esses arquivos são carregados automaticamente pelo framework. Para iniciar a maioria dos aplicativos, você começará definindo rotas em seu arquivo routes/web.php. As rotas definidas em routes/web.php podem ser acessadas digitando a URL da rota definida em seu navegador. 
+
+Fluxo da aplicação
+1. Definir rota
+2. Criar Controller
+3. Controller busca dados no Model
+4. Usar retorno do controller na View
+
+&nbsp;
+
 ## Views
 Blade é o Template Engine do Laravel, ele oferece a possibilidade de deixar views dinâmicas exibindo tags HTML e também outros dados que podem vir do banco de dados. As Views são renderizadas pelo Blade e são sua responsabilidade.
 * Possibilidade de criar condições, laços de repetição, etc
@@ -35,11 +46,6 @@ Criando um Controller
 
 `php artisan make:controller NomeController`
 
-Fluxo
-1. Definir rota
-2. Criar controller
-3. Controller busca dados no Model
-4. Usar retorno do controller na view
 
 &nbsp;
 
