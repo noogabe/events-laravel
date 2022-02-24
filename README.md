@@ -30,6 +30,18 @@ Fluxo da aplicação
 
 &nbsp;
 
+## Middleware
+O Middleware é apenas um mecanismo de filtragem de requisição HTTP. Ou seja, ele permite ou barra determinados fluxos de requisição que entram na sua aplicação, baseado em regras definidas. Por exemplo, o Laravel inclui um middleware que verifica se o usuário do seu aplicativo está autenticado. Se o usuário não estiver autenticado, o middleware redirecionará o usuário para a tela de login. No entanto, se o usuário for autenticado, o middleware permitirá que a solicitação continue na aplicação. Existem vários middlewares incluídos no framework Laravel, incluindo middleware para autenticação e proteção CSRF. Todos esses middlewares estão localizados no app/Http/Middlewarediretório.
+
+Para criar um novo middleware
+`php artisan make:middleware NomeMiddleware`
+
+* Middlewares podem fazer qualquer tipo de verificação
+* Podemos imaginar o middleware como uma série de solicitações HTTP de "camadas" que devem passar antes de atingirem seu aplicativo
+* Cada camada pode examinar a solicitação e até rejeitá-la completamente
+
+&nbsp;
+
 ## Views
 Blade é o Template Engine do Laravel, ele oferece a possibilidade de deixar views dinâmicas exibindo tags HTML e também outros dados que podem vir do banco de dados. As Views são renderizadas pelo Blade e são sua responsabilidade.
 * Possibilidade de criar condições, laços de repetição, etc
