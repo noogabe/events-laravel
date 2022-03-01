@@ -16,7 +16,7 @@ use App\Http\Controllers\ContactController;
 */
 
 Route::get('/', [EventController::class, 'index'])->name('index');
-
 Route::get('/events/create', [EventController::class, 'create'])->name('create');
+Route::post('/events', [EventController::class, 'store']);
 
 Route::get('/contact', [ContactController::class, 'contact'])->name('contact');
