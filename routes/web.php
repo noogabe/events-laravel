@@ -20,3 +20,7 @@ Route::get('/events/create', [EventController::class, 'create']);
 Route::get('/events/{id}', [EventController::class, 'show']);
 Route::post('/events', [EventController::class, 'store']);
 Route::get('/contact', [ContactController::class, 'contact']);
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
