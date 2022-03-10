@@ -1,15 +1,14 @@
-
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Event Not Found</title>
+        <title>@yield('title')</title>
 
         <!-- Fonts -->
         <link rel="dns-prefetch" href="//fonts.gstatic.com">
-        <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
 
         <!-- Styles -->
         <style>
@@ -36,26 +35,23 @@
                 position: relative;
             }
 
-            .code {
-                border-right: 2px solid;
-                font-size: 26px;
-                padding: 0 15px 0 15px;
+            .content {
                 text-align: center;
             }
 
-            .message {
-                font-size: 18px;
-                text-align: center;
+            .title {
+                font-size: 36px;
+                padding: 20px;
             }
         </style>
     </head>
     <body>
         <div class="flex-center position-ref full-height">
-            <div class="code">
-                404            </div>
-
-            <div class="message" style="padding: 10px;">
-                Event Not Found            </div>
+            <div class="content">
+                <div class="title">
+                    @yield('message')
+                </div>
+            </div>
         </div>
     </body>
 </html>

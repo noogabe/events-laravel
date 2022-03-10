@@ -9,6 +9,6 @@ class EventNotFoundException extends Exception
     function report (){}
 
     function render (){
-        return view('errors.event-not-found');
+        return view('errors.404-event-not-found');
     }
 }
