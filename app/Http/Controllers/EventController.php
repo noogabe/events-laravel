@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
 use App\Event;
 use App\User;
+use App\Exceptions\EventNotFoundException;
 
 class EventController extends Controller
 {
@@ -26,9 +26,13 @@ class EventController extends Controller
         return view('welcome', ['events' => $events, 'search' => $search]);
     }
 
+    //==============================================================================
+
     public function create(){
         return view('events.create');
     }
+
+    //==============================================================================
 
     public function store(Request $request){
 
@@ -46,11 +50,14 @@ class EventController extends Controller
         if($request->hasFile('image') && $request->file('image')->isValid()){
             
             $requestImage = $request->image;
-            
+
+            //Armazenando a extensão da imagem
             $extension = $requestImage->extension();
             
+            //Armazenando o nome da imagem
             $imageName = md5($requestImage->getClientOriginalName() . strtotime('now')) . '.' . $extension;
 
+            //Movendo a imagem que veio do request para uma pasta e salvando com o nome definido anteriormente
             $requestImage->move(public_path('img/events'), $imageName);
 
             $event->image = $imageName;
@@ -62,15 +69,23 @@ class EventController extends Controller
         $event->user_id = $user->id;
 
         //Salva no db
-        $event->save();
+        $event->saveOrFail();
 
         //Redireciona à pagina inicial e envia uma mensagem através do metodo with()
         return redirect('/')->with('msg', 'Evento criado com sucesso!');
     }
 
+    //==============================================================================
+
     public function show($id) {
-        
-        $event = Event::findOrFail($id);
+
+        //Tenta achar o evento através do findOrFail
+        //Caso não ache, captura a exceção e lança a exceção personalizada
+        try {
+            $event = Event::findOrFail($id);
+        } catch (\Exception $exception){
+            throw new EventNotFoundException();
+        }
 
         //Buscando no banco o usuário que possui este id
         $eventOwner = User::where('id', $event->user_id)->first()->toArray();
