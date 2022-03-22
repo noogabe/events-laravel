@@ -11,7 +11,9 @@ class Event extends Model
         'items' => 'array'
     ];
 
-    protected $dates = ['date'];
+    protected $dates = [
+        'date' => 'Y-m-d'
+    ];
 
     /* Relação de pertencimento
     * Um evento pertence a um usuário */
