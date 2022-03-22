@@ -13,6 +13,8 @@ class Event extends Model
 
     protected $dates = ['date'];
 
+    /* Relação de pertencimento
+    * Um evento pertence a um usuário */
     public function user(){
         return $this->belongsTo('App\User');
     }
