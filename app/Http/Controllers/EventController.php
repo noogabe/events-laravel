@@ -30,10 +30,14 @@ class EventController extends Controller
         return view('welcome', ['events' => $events, 'search' => $search]);
     }
 
+
+
     /* Exibe view de criação de novo evento */
     public function create(){
         return view('events.create');
     }
+
+
 
     /* Armazena dados da requisição no banco de dados */
     public function store(Request $request){
@@ -77,6 +81,8 @@ class EventController extends Controller
         return redirect('/dashboard')->with('msg', 'Evento criado com sucesso!');
     }
 
+
+
     /* Exibe um evento específico através do parâmetro id */
     public function show($id) {
 
@@ -94,6 +100,8 @@ class EventController extends Controller
         return view('events.show', ['event' => $event, 'eventOwner' => $eventOwner]);
     }
 
+
+
     /* Dashboard que exibe todos os eventos
     ** Do usuário logado
     */
@@ -106,17 +114,51 @@ class EventController extends Controller
         return view('events.dashboard', ['events' => $events]);
     }
 
+
+    /* Exibe view para atualizar evento */
+    public function edit($id){
+
+        $event = Event::findOrFail($id);
+
+        return view('events.edit', ['event' => $event]);
+    }
+
+    /* Atualiza um evento */
+    public function update(Request $request, $id){
+
+        $data = $request->all();
+
+        // Image upload
+        if($request->hasFile('image') && $request->file('image')->isValid()){
+            
+            $requestImage = $request->image;
+
+            // Armazenando a extensão da imagem
+            $extension = $requestImage->extension();
+            
+            // Armazenando o nome da imagem
+            $imageName = md5($requestImage->getClientOriginalName() . strtotime('now')) . '.' . $extension;
+
+            // Movendo a imagem que veio do request para uma pasta e salvando com o nome definido anteriormente
+            $requestImage->move(public_path('img/events'), $imageName);
+
+            $data['image'] = $imageName;
+
+        }
+
+        $event = Event::findOrFail($id);   
+        
+        File::delete(public_path('img\\events\\') . $event->image);
+
+        $event->update($data);
+
+        return redirect('/dashboard')->with('msg', 'Evento editado com sucesso!');
+    }
+
+
+
     /* Deleta um evento */
     public function delete($id){
-
-        // try {
-        //     $event = Event::findOrFail($id);
-        //     $event->delete();
-        //     File::delete(public_path('img\\events\\') . $event->image);
-        //     return redirect('/dashboard')->with('msg', 'Evento excluído com sucesso!');
-        // } catch (\Exception $exception){
-        //     throw new EventNotFoundException();
-        // }
 
         $events = auth()->user()->events;
         foreach ($events as $event) {

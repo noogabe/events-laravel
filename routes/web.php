@@ -29,8 +29,14 @@ Route::get('/dashboard', 'EventController@dashboard')->name('dashboard')->middle
 // Exibe um evento específico pelo parâmetro id
 Route::get('/events/{id}', 'EventController@show')->name('show');
 
+// Exibe view para edição de um evento
+Route::get('/events/edit/{id}', 'EventController@edit')->name('edit')->middleware('auth');
+
+// Atualiza um evento pelo parâmetro id
+Route::put('/events/update/{id}', 'EventController@update')->name('update')->middleware('auth');
+
 // Deleta um evento específico pelo parâmetro id
-Route::delete('/events/{id}', 'EventController@delete')->name('delete');
+Route::delete('/events/{id}', 'EventController@delete')->name('delete')->middleware('auth');
 
 // Rotas da autenticação padrão
 Auth::routes();
