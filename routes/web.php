@@ -17,26 +17,23 @@ use Illuminate\Support\Facades\Auth;
 */
 
 // Index página inicial
-Route::get('/', [EventController::class, 'index']);
+Route::get('/', 'EventController@index')->name('index');
 
 // Exibe view com formulário para criar evento, retrinsgindo acesso a usuários autenticados
-Route::get('/events/create', [EventController::class, 'create'])->middleware('auth');
+Route::get('/events/create', 'EventController@create')->name('create')->middleware('auth');
 
 // Armazena evento no db
-Route::post('/events/create', [EventController::class, 'store']);
+Route::post('/events/create', 'EventController@store')->name('store');
 
 // Exibe home
-Route::get('/dashboard', [EventController::class, 'dashboard'])->middleware('auth');
+Route::get('/dashboard', 'EventController@dashboard')->name('dashboard')->middleware('auth');
 
 // Exibe um evento específico pelo parâmetro id
-Route::get('/events/{id}', [EventController::class, 'show']);
+Route::get('/events/{id}', 'EventController@show')->name('show');
 
 // Deleta um evento específico pelo parâmetro id
-Route::delete('/events/{id}', [EventController::class, 'delete']);
+Route::delete('/events/{id}', 'EventController@delete')->name('delete');
 
-// Exibe view de contato
-Route::get('/contact', [ContactController::class, 'contact']);
-
-// Rotas de autenticação
+// Rotas da autenticação padrão
 Auth::routes();
 
