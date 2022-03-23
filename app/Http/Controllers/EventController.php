@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use App\Event;
 use App\User;
-use App\Exceptions\EventNotFoundException;  
+use App\Exceptions\EventNotFoundException;
+use App\Http\Requests\EventCreateRequest;
+use App\Http\Requests\EventUpdateRequest;
 
 class EventController extends Controller
 {
@@ -40,8 +41,10 @@ class EventController extends Controller
 
 
     /* Armazena dados da requisição no banco de dados */
-    public function store(Request $request){
+    public function store(EventCreateRequest $request){
 
+        $request->validated();
+        
         // Instancia novo evento e recebe dados da requisição
         $event = new Event;
 
@@ -124,8 +127,10 @@ class EventController extends Controller
     }
 
     /* Atualiza um evento */
-    public function update(Request $request, $id){
+    public function update(EventUpdateRequest $request, $id){
 
+        $request->validated();
+        
         $data = $request->all();
 
         // Image upload

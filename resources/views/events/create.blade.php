@@ -6,6 +6,15 @@
 
 <div id="event-create-container" class="col-md-6 offset-md-3">
     <h1>Crie o seu evento</h1>
+    @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
     <form action="/events/create" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="form-group">
