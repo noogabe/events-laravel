@@ -38,6 +38,9 @@ Route::put('/events/update/{id}', 'EventController@update')->name('update')->mid
 // Deleta um evento específico pelo parâmetro id
 Route::delete('/events/{id}', 'EventController@delete')->name('delete')->middleware('auth');
 
+// Usuário juntar-se a um evento
+Route::post('events/join/{id}', 'EventController@joinEvent')->name('joinEvent')->middleware('auth');
+
 // Rotas da autenticação padrão
 Auth::routes();
 

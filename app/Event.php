@@ -22,4 +22,9 @@ class Event extends Model
     public function user(){
         return $this->belongsTo('App\User');
     }
+
+    /* Um evento possui/pertence a vários usuários */
+    public function users(){
+        return $this->belongsToMany('App\User');
+    }
 }

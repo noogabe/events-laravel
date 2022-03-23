@@ -171,4 +171,15 @@ class EventController extends Controller
 
         return redirect('/dashboard')->with('msg', 'Sem permissão para exclusão desse evento!');
     }
+
+    public function joinEvent($id){
+
+        $user = auth()->user();
+ 
+        $user->eventsAsParticipant()->attach($id);
+
+        $event = Event::findOrFail($id);
+
+        return back()->with('msg', 'Presença confirmada em ' . $event->title);
+    }
 }
