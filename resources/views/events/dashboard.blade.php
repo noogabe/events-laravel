@@ -67,14 +67,21 @@
                 <td><a href="/events/{{ $event->id }}">{{ $event->title }}</a></td>
                 <td>{{ count($event->users) }}</td>
                 <td>
-                    <a href="#">Cancelar Presença</a>
+                    <form action="/events/leave/{{ $event->id }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger delete-btn">
+                            <ion-icon name="trash-outline"></ion-icon>
+                            Cancelar Presença
+                        </button>  
+                    </form>
                 </td>
             </tr>
         @endforeach    
     </tbody>
 </table>
 @else
-<p>Você ainda não está participando de nenhum evento, <a href="/">veja todos os eventos</a></p>
+<p>Você ainda não está participando de nenhum evento. <a href="/">Veja todos os eventos!</a></p>
 @endif
 </div>
 

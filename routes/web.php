@@ -41,6 +41,9 @@ Route::delete('/events/{id}', 'EventController@delete')->name('delete')->middlew
 // Usuário juntar-se a um evento
 Route::post('events/join/{id}', 'EventController@joinEvent')->name('joinEvent')->middleware('auth');
 
+// Usuário remove presença em um evento
+Route::delete('events/leave/{id}', 'EventController@leaveEvent')->name('leaveEvent')->middleware('auth');
+
 // Rotas da autenticação padrão
 Auth::routes();
 

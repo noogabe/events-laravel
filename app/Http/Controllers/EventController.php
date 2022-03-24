@@ -97,10 +97,25 @@ class EventController extends Controller
             throw new EventNotFoundException();
         }
 
+        //Verificando se o usuário já participa do evento
+        $user = auth()->user();
+        $hasUserJoined = false;
+
+        if($user){
+
+            $userEvents = $user->eventsAsParticipant->toArray();
+
+            foreach($userEvents as $userEvent){
+                if($userEvent['id'] == $id){
+                    $hasUserJoined = true;
+                }
+            }
+        }
+
         //Buscando no banco o usuário que possui este id
         $eventOwner = User::where('id', $event->user_id)->first()->toArray();
 
-        return view('events.show', ['event' => $event, 'eventOwner' => $eventOwner]);
+        return view('events.show', ['event' => $event, 'eventOwner' => $eventOwner, 'hasUserJoined' => $hasUserJoined]);
     }
 
 
@@ -137,6 +152,8 @@ class EventController extends Controller
         
         $data = $request->all();
 
+        $event = Event::findOrFail($id);   
+
         // Image upload
         if($request->hasFile('image') && $request->file('image')->isValid()){
             
@@ -153,11 +170,10 @@ class EventController extends Controller
 
             $data['image'] = $imageName;
 
-        }
+            // Deleta a imagem anterior
+            File::delete(public_path('img\\events\\') . $event->image);
 
-        $event = Event::findOrFail($id);   
-        
-        File::delete(public_path('img\\events\\') . $event->image);
+        }
 
         $event->update($data);
 
@@ -190,5 +206,16 @@ class EventController extends Controller
         $event = Event::findOrFail($id);
 
         return back()->with('msg', 'Presença confirmada em ' . $event->title);
+    }
+
+    public function leaveEvent($id){
+
+        $user = auth()->user();
+
+        $user->eventsAsParticipant()->detach($id);
+
+        $event = Event::findOrFail($id);
+
+        return back()->with('msg', 'Presença cancelada no evento ' . $event->title);
     }
 }
