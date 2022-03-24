@@ -114,7 +114,11 @@ class EventController extends Controller
 
         $events = $user->events;
 
-        return view('events.dashboard', ['events' => $events]);
+        $eventsAsParticipant = $user->eventsAsParticipant;
+
+        return view('events.dashboard', 
+            ['events' => $events, 'eventsAsParticipant' => $eventsAsParticipant]
+        );
     }
 
 
