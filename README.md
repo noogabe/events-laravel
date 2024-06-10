@@ -1,6 +1,29 @@
-# Aprendendo Laravel 7.0.0
+# Projeto de gerenciamento de eventos 
+## Pré-requisitos
+* [Composer](https://getcomposer.org/download/)
+* [Xampp (Apache, PHP e Mysql)](https://www.apachefriends.org/download.html)
 
-## Configurando ambiente
+## Instalação
+1. **Clone o repositório**
+ ```bash
+ git clone git@github.com:noogabe/events-laravel.git
+ ```
+
+2. **Instale as dependências**
+```bash
+composer install
+```
+
+3. **Crie um arquivo chamado .env e copie e cole o contéudo de env.example**
+4. **Inicie o servidor**
+```bash
+php artisan serve
+```
+
+
+## Aprendendo Laravel 7.0.0
+
+### Configurando novo projeto
 * Instalar Composer
 * Xampp (Apache, PHP e Mysql)
 
@@ -10,16 +33,14 @@ Criar projeto Laravel
 Ou (usando a versão 7 do Laravel)
 `composer create-project laravel/laravel=7 --prefer-dist NomeProjeto`
 
-&nbsp;
 
-## Iniciando um servidor com artisan
+### Iniciando um servidor com artisan
 Para visualizar projeto no navegador
 
 `php artisan serve`
 
-&nbsp;
 
-## Routing
+### Routing
 O Routing no Laravel permite que você roteie todas as solicitações de sua aplicação para seu controlador apropriado. As rotas principais e primárias do Laravel reconhecem e aceitam um URI (Uniform Resource Identifier) junto com um closure, visto que deve ser uma forma simples e expressiva de roteamento. Todas as rotas do Laravel são definidas em seus arquivos de rotas, que estão localizados no diretório **routes**. Esses arquivos são carregados automaticamente pelo framework. Para iniciar a maioria dos aplicativos, você começará definindo rotas em seu arquivo routes/web.php. As rotas definidas em routes/web.php podem ser acessadas digitando a URL da rota definida em seu navegador. 
 
 Fluxo da aplicação
@@ -28,9 +49,8 @@ Fluxo da aplicação
 3. Controller busca dados no Model
 4. Usar retorno do controller na View
 
-&nbsp;
 
-## Middleware
+### Middleware
 O Middleware é apenas um mecanismo de filtragem de requisição HTTP. Ou seja, ele permite ou barra determinados fluxos de requisição que entram na sua aplicação, baseado em regras definidas. Por exemplo, o Laravel inclui um middleware que verifica se o usuário do seu aplicativo está autenticado. Se o usuário não estiver autenticado, o middleware redirecionará o usuário para a tela de login. No entanto, se o usuário for autenticado, o middleware permitirá que a solicitação continue na aplicação. Existem vários middlewares incluídos no framework Laravel, incluindo middleware para autenticação e proteção CSRF. Todos esses middlewares estão localizados no app/Http/Middlewarediretório.
 
 Para criar um novo middleware
@@ -40,18 +60,17 @@ Para criar um novo middleware
 * Podemos imaginar o middleware como uma série de solicitações HTTP de "camadas" que devem passar antes de atingirem seu aplicativo
 * Cada camada pode examinar a solicitação e até rejeitá-la completamente
 
-&nbsp;
 
-## Views
+### Views
 Blade é o Template Engine do Laravel, ele oferece a possibilidade de deixar views dinâmicas exibindo tags HTML e também outros dados que podem vir do banco de dados. As Views são renderizadas pelo Blade e são sua responsabilidade.
 * Possibilidade de criar condições, laços de repetição, etc
 * Comentário: {{-- Comentario não é renderizado nem pra view --}}
 * Podemos criar um layout padrão: main.blade.php, onde podemos colocar tudo o que for comum a todas as views
 * Nas outras views, basta recuperar o main e inserir seu respectivo conteúdo
 
-&nbsp;
 
-## Controllers
+
+### Controllers
 Contém quase toda a lógica da aplicação
 
 Criando um Controller
@@ -59,9 +78,8 @@ Criando um Controller
 `php artisan make:controller NomeController`
 
 
-&nbsp;
 
-## Model
+### Model
 A configuração do banco de dados é feita no arquivo .env. Esse arquivo não é versionado por segurança. Eloquent é a ORM (Object Relational Map) do Laravel, ela é responsável pela conexão com o banco de dados e representa a abstração de uma Query. 
 * select
 * insert
@@ -70,9 +88,8 @@ A configuração do banco de dados é feita no arquivo .env. Esse arquivo não �
 
 Cada tabela possui um Model que é responsável pela interação entre requisições do bd. A convenção par o Model é o nome da entidade no singular (Event), enquanto a tabela é no pural (events). No Model são feitas poucas alterações nos arquivos, geralmente configurações específicas.
 
-&nbsp;
 
-## Migrations
+### Migrations
 As migrações são como controle de versão para seu banco de dados, permitindo que sua equipe defina e compartilhe a definição do esquema de banco de dados do aplicativo. 
 * Versionamento do banco de dados
 * Podemos avançar e retroceder para outra versão a qualquer momento (migrate e rollback)
