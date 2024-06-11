@@ -14,18 +14,23 @@
 composer install
 ```
 
-3. **Crie um arquivo chamado .env e copie e cole o contéudo de env.example**
+3. **Gere a chave da aplicação**
+```bash
+php artisan key:generate
+```
 
-4. **Inicie o Xampp**
+4. **Crie um arquivo chamado .env e copie e cole o contéudo de env.example**
 
-5. **No Mysql, em http://localhost:80/phpmyadmin/ crie um banco de dados chamado 'events'**
+5. **Inicie o Xampp**
 
-6. **Execute as migrações**
+6. **No Mysql, em http://localhost:80/phpmyadmin/ crie um banco de dados chamado 'events'**
+
+7. **Execute as migrações**
 ```bash
 php artisan migrate
 ```
 
-7. **Inicie o servidor**
+8. **Inicie o servidor**
 ```bash
 php artisan serve
 ```
