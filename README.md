@@ -15,7 +15,15 @@ composer install
 ```
 
 3. **Crie um arquivo chamado .env e copie e cole o contéudo de env.example**
-4. **Inicie o servidor**
+
+4. **No mysql, crie um banco de dados chamado 'events'**
+
+5. **Execute as migrações**
+```bash
+php artisan migrate
+```
+
+6. **Inicie o servidor**
 ```bash
 php artisan serve
 ```
